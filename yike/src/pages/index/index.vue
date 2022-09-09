@@ -1,5 +1,7 @@
 <template>
   <view class="content">
+    <!-- 这里是状态栏 -->
+    <view class="status_bar"></view>
     <view class="header">
       <view class="top-bar">
         <image class="title" src="../../static/index/logo.png" mode="aspectFit" lazy-load="false" />
@@ -12,6 +14,21 @@
         </view>
       </view>
     </view>
+    <view class="list">
+      <uni-list :border="true">
+        <!-- 头像显示角标 -->
+        <uni-list-chat
+          v-for="item in 18"
+          :key="item"
+          title="uni-app"
+          avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png"
+          note="您收到一条新的消息"
+          time="2020-02-02 20:20"
+          badge-positon="left"
+          badge-text="99">
+        </uni-list-chat>
+      </uni-list>
+    </view>
   </view>
 </template>
 
@@ -19,7 +36,6 @@
 export default {
   data() {
     return {
-      title: 'Hello',
     }
   },
   onLoad() {},
@@ -28,6 +44,10 @@ export default {
 </script>
 
 <style lang="scss">
+  .status_bar {
+    height: var(--status-bar-height);
+    width: 100%;
+  }
   .header {
     border-bottom: 1rpx solid $uni-border-color;
     .top-bar {
