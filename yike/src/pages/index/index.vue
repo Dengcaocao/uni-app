@@ -20,6 +20,8 @@
         <uni-list-chat
           v-for="item in 18"
           :key="item"
+          clickable 
+          @click="toLogin"
           title="uni-app"
           avatar="https://vkceyugu.cdn.bspapp.com/VKCEYUGU-dc-site/460d46d0-4fcc-11eb-8ff1-d5dcf8779628.png"
           note="您收到一条新的消息"
@@ -33,21 +35,23 @@
 </template>
 
 <script>
-export default {
-  data() {
-    return {
+import { defineComponent } from 'vue'
+export default defineComponent({
+  name: "App",
+  setup () {
+    const toLogin = () => {
+      uni.navigateTo({
+        url: '/pages/login/login'
+      })
     }
-  },
-  onLoad() {},
-  methods: {},
-}
+    return {
+      toLogin
+    }
+  }
+})
 </script>
 
 <style lang="scss">
-  .status_bar {
-    height: var(--status-bar-height);
-    width: 100%;
-  }
   .header {
     border-bottom: 1rpx solid $uni-border-color;
     .top-bar {
