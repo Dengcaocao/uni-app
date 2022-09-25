@@ -13,10 +13,10 @@
       <view class="tips">您好，欢迎来到 yike！</view>
       <form @submit="formSubmit" @reset="formReset">
 				<view class="uni-form-item uni-column">
-					<input class="uni-input" placeholder-class="placeholder-style" name="input" placeholder="账号" />
+					<input class="uni-input" placeholder-class="placeholder-style" name="user" placeholder="账号" />
 				</view>
         <view class="uni-form-item uni-column">
-					<input type="password" class="uni-input" placeholder-class="placeholder-style" name="input" placeholder="密码" />
+					<input type="password" class="uni-input" placeholder-class="placeholder-style" name="password" placeholder="密码" />
 				</view>
 				<view class="uni-btn-v">
 					<button form-type="submit">登录</button>
@@ -25,6 +25,26 @@
     </view>
   </view>
 </template>
+<script>
+import { defineComponent } from 'vue'
+
+export default defineComponent({
+  setup() {
+    const formSubmit = e => {
+      console.log('form发生了submit事件，携带数据为：' + JSON.stringify(e.detail.value))
+      var formdata = e.detail.value
+      uni.showModal({
+        content: '表单数据内容：' + JSON.stringify(formdata),
+        showCancel: false
+      })
+    }
+    return {
+      formSubmit
+    }
+  }
+})
+</script>
+
 <style scoped lang="scss">
   .navigation {
     display: flex;

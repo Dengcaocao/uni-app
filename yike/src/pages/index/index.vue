@@ -4,8 +4,8 @@
     <view class="status_bar"></view>
     <view class="header">
       <view class="top-bar">
-        <image class="title" src="../../static/index/logo.png" mode="aspectFit" lazy-load="false" />
-        <image class="action" src="../../static/index/add.png" mode="aspectFit" lazy-load="false" />
+        <image class="title" src="@/static/logo.png" mode="aspectFit" lazy-load="false" />
+        <image class="action" src="@/static/index/add.png" mode="aspectFit" lazy-load="false" />
       </view>
       <view class="search-box">
         <view class="input">
