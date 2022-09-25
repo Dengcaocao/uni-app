@@ -41,7 +41,7 @@ export default defineComponent({
   setup () {
     const toLogin = () => {
       uni.navigateTo({
-        url: '/pages/login/login'
+        url: '/pages/register/register'
       })
     }
     return {

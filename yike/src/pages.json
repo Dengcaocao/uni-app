@@ -10,8 +10,12 @@
 			"path": "pages/login/login",
 			"style": {
 				"navigationStyle": "custom"
-				// "navigationBarBackgroundColor": "#FFFFFF",
-				// "backgroundColor": "#FFFFFF"
+			}
+		},
+		{
+			"path": "pages/register/register",
+			"style": {
+				"navigationStyle": "custom"
 			}
 		}
 	],

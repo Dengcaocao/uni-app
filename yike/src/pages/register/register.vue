@@ -3,23 +3,32 @@
     <!-- 这里是状态栏 -->
     <view class="status_bar"></view>
     <view class="navigation">
+      <image  class="back" src="@/static/back.png" mode="aspectFit" lazy-load="false" />
       <image class="close" src="@/static/close.png" mode="aspectFit" lazy-load="false" />
-      <view class="register">注册</view>
     </view>
     <!-- logo -->
     <image class="logo" mode="aspectFit" src="@/static/logo.png"></image>
     <view class="content">
-      <view class="title">登录</view>
-      <view class="tips">您好，欢迎来到 yike！</view>
+      <view class="title">注册</view>
       <form @submit="formSubmit" @reset="formReset">
 				<view class="uni-form-item uni-column">
 					<input class="uni-input" placeholder-class="placeholder-style" name="user" placeholder="账号" />
+          <view class="tips-text">用户名已存在</view>
+				</view>
+        <view class="uni-form-item uni-column">
+					<input class="uni-input" placeholder-class="placeholder-style" name="user" placeholder="邮箱" />
+          <view class="tips-text">
+            <image style="width: 40rpx;" src="@/static/register/pass.png" mode="aspectFit" lazy-load="false" />
+          </view>
 				</view>
         <view class="uni-form-item uni-column">
 					<input type="password" class="uni-input" placeholder-class="placeholder-style" name="password" placeholder="密码" />
+          <view class="tips-text">
+            <image style="width: 40rpx;" src="@/static/register/check.png" mode="aspectFit" lazy-load="false" />
+          </view>
 				</view>
 				<view class="uni-btn-v">
-					<button form-type="submit">登录</button>
+					<button form-type="submit">注册</button>
 				</view>
 			</form>
     </view>
@@ -54,14 +63,11 @@ export default defineComponent({
     height: 88rpx;
     padding: 0 24rpx;
     background-color: $uni-bg-color;
-    .close {
+    .close,
+    .back {
       width: 36rpx;
       height: 36rpx;
-    }
-    .register {
-      font-size: 36rpx;
-      color: $uni-text-color;
-      font-weight: 500;
+      font-weight: 600;
     }
   }
   .logo {
@@ -79,18 +85,23 @@ export default defineComponent({
       color: $uni-text-color;
       font-weight: 500;
     }
-    .tips {
-      margin-top: $uni-spacing-col-base;
-      color: $uni-text-color-placeholder;
-      font-weight: 300;
-      font-size: 36rpx;
-    }
     .uni-form-item {
-      // height: 60px;
+      position: relative;
       border-bottom: 1px solid $uni-border-color;
       .uni-input {
         height: 100rpx;
         margin-top: $uni-spacing-col-lg;
+      }
+      .tips-text {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translateY(-50%);
+        color: $uni-color-error;
+        image {
+          width: 40rpx;
+          height: 40rpx;
+        }
       }
       // & /deep/ .placeholder-style {
       //   color: $uni-text-color-placeholder;
