@@ -9,7 +9,13 @@
 		{
 			"path": "pages/more/index",
 			"style": {
-				"navigationBarTitleText": "WeBox"
+				"navigationBarTitleText": "分类"
+			}
+		},
+		{
+			"path": "pages/preview/index",
+			"style": {
+				"navigationBarTitleText": "preview"
 			}
 		}
 	],
