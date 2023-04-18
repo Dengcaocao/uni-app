@@ -3,10 +3,36 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "首页"
+				"navigationBarTitleText": "WeBox"
+			}
+		},
+		{
+			"path": "pages/more/index",
+			"style": {
+				"navigationBarTitleText": "WeBox"
 			}
 		}
 	],
+	"tabBar": {
+		"color": "#333",
+		"selectedColor": "#6D8c50",
+		"borderStyle": "black",
+		"backgroundColor": "#ffffff",
+		"list": [
+			{
+				"pagePath": "pages/index/index",
+				"iconPath": "static/tabbar/home.png",
+				"selectedIconPath": "static/tabbar/home_selected.png",
+				"text": "首页"
+			},
+			{
+				"pagePath": "pages/more/index",
+				"iconPath": "static/tabbar/project.png",
+				"selectedIconPath": "static/tabbar/project_selected.png",
+				"text": "项目"
+			}
+		]
+	},
 	"globalStyle": {
 		"navigationBarTextStyle": "white",
 		"navigationBarTitleText": "WeBox",
