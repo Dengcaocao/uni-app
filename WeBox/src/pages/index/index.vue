@@ -62,6 +62,12 @@ const getCatetory = async () => {
   })
 }
 
+const preview = (link: string) => {
+  uni.navigateTo({
+	  url: `/pages/preview/index?link=${link}`
+  })
+}
+
 onMounted(async () => {
   banner = [
     {
