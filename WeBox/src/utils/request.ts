@@ -27,8 +27,8 @@ class Service {
       }
       uni.request({
         ...completeOptions,
-        success: (res: object & { code: number }) => {
-          if (res.code !== 200) throw new Error('唉，数据拉取失败!')
+        success: (res: object & { statusCode: number }) => {
+          if (res.statusCode !== 200) throw new Error('唉，数据拉取失败!')
           resolve(res)
         },
         fail: (error: object & { message: string }) => {
