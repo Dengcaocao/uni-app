@@ -13,6 +13,7 @@
       </swiper-item>
     </swiper>
   </view>
+
   <view class="icons">
     <view class="icon">1</view>
     <view class="icon">2</view>
@@ -23,50 +24,22 @@
     <view class="icon">7</view>
     <view class="icon">8</view>
   </view>
+
   <view class="content-box">
-    <view class="content-group">
+    <view class="content-group" v-for="item in catetory" :key="item.type">
       <view class="header">
-        <view class="title">CSS3动画</view>
+        <view class="title">{{item.type}}</view>
         <view class="more">更多</view>
       </view>
       <view class="content">
-        <view class="demo shadow">
-          <image class="demo-img-small" src="https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" />
+        <view class="demo shadow"
+          v-for="demo in item.data"
+          :key="demo.link"
+          @click="preview(demo.link)">
+          <image class="demo-img-small" :src="demo.samllImage" />
           <view class="demo-info">
-            <view class="demo-title single-line-text">蛇形边界</view>
-            <view class="demo-description single-line-text">这TM是真漂亮</view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="content-group">
-      <view class="header">
-        <view class="title">CSS3动画</view>
-        <view class="more">更多</view>
-      </view>
-      <view class="content">
-        <view class="demo">
-          <image class="demo-img-small" src="https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" />
-          <view class="demo-info">
-            <view class="demo-title single-line-text">蛇形边界</view>
-            <view class="demo-description single-line-text">这TM是真漂亮</view>
-          </view>
-        </view>
-      </view>
-    </view>
-
-    <view class="content-group">
-      <view class="header">
-        <view class="title">CSS3动画</view>
-        <view class="more">更多</view>
-      </view>
-      <view class="content">
-        <view class="demo">
-          <image class="demo-img-small" src="https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" />
-          <view class="demo-info">
-            <view class="demo-title single-line-text">蛇形边界</view>
-            <view class="demo-description single-line-text">这TM是真漂亮</view>
+            <view class="demo-title single-line-text">{{demo.title}}</view>
+            <view class="demo-description single-line-text">{{demo.description}}</view>
           </view>
         </view>
       </view>
@@ -78,21 +51,30 @@
 import { reactive, onMounted } from 'vue'
 import Api from '@/api/index'
 
-const banner = reactive([
-  {
-    src: 'https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
-  },
-  {
-    src: 'https://img1.baidu.com/it/u=2135316162,3264555983&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
-  },
-  {
-    src: 'https://img2.baidu.com/it/u=3089456875,3715235379&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
-  }
-])
+let banner: any[] = reactive([])
+
+let catetory: any[] = reactive([])
+const getCatetory = async () => {
+  const res: any = await Api.getBanner()
+  // 处理直接赋值视图不更新的问题
+  res.data.data.forEach((element: any) => {
+    catetory.push(element)
+  })
+}
 
 onMounted(async () => {
-  const res = await Api.getBanner()
-  console.log(res)
+  banner = [
+    {
+      src: 'https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
+    },
+    {
+      src: 'https://img1.baidu.com/it/u=2135316162,3264555983&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
+    },
+    {
+      src: 'https://img2.baidu.com/it/u=3089456875,3715235379&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
+    }
+  ]
+  getCatetory()
 })
 </script>
 <style scoped lang="scss">
@@ -147,6 +129,7 @@ onMounted(async () => {
     .content {
       display: flex;
       justify-content: space-between;
+      flex-wrap: wrap;
       margin-top: $uni-spacing-col-base;
       .demo {
         display: flex;
@@ -157,6 +140,7 @@ onMounted(async () => {
         padding: $uni-spacing-row-base;
         box-sizing: border-box;
         border-radius: 8rpx;
+        margin-bottom: 16rpx;
         background-color: $uni-bg-color-hover;
         .demo-img-small {
           width: 98rpx;
