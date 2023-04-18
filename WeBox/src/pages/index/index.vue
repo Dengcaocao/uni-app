@@ -30,7 +30,7 @@
         <view class="more">更多</view>
       </view>
       <view class="content">
-        <view class="demo">
+        <view class="demo shadow">
           <image class="demo-img-small" src="https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500" />
           <view class="demo-info">
             <view class="demo-title single-line-text">蛇形边界</view>
@@ -75,7 +75,8 @@
 </template>
 
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, onMounted } from 'vue'
+import Api from '@/api/index'
 
 const banner = reactive([
   {
@@ -88,6 +89,11 @@ const banner = reactive([
     src: 'https://img2.baidu.com/it/u=3089456875,3715235379&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
   }
 ])
+
+onMounted(async () => {
+  const res = await Api.getBanner()
+  console.log(res)
+})
 </script>
 <style scoped lang="scss">
 .swiper {
@@ -151,7 +157,7 @@ const banner = reactive([
         padding: $uni-spacing-row-base;
         box-sizing: border-box;
         border-radius: 8rpx;
-        background-color: antiquewhite;
+        background-color: $uni-bg-color-hover;
         .demo-img-small {
           width: 98rpx;
           height: 100%;
@@ -163,10 +169,11 @@ const banner = reactive([
           .demo-title {
             width: 100rpx;
             font-size: $uni-font-size-base;
+            color: #fff;
           }
           .demo-description {
             font-size: $uni-font-size-sm;
-            color: $uni-text-color-grey;
+            color: $uni-text-color-placeholder;
             line-height: 32rpx;
           }
         }
