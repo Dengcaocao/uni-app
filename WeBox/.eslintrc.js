@@ -1,4 +1,10 @@
 module.exports = {
+  // 添加全局变量，防止no-undef报错
+  globals: {
+    uni: true,
+    wx: true,
+    getCurrentPages: true
+  },
   env: {
     browser: true,
     es2021: true
