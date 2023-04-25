@@ -49,17 +49,16 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
+import type { bannerType, catetoryType } from '@/types/index-type'
 import Api from '@/api/index'
 
-let banner: any[] = reactive([])
+let banner: bannerType[] = reactive([])
 
-let catetory: any[] = reactive([])
+let catetory: catetoryType[] = reactive([])
 const getCatetory = async () => {
   const res: any = await Api.getBanner()
   // 处理直接赋值视图不更新的问题
-  res.data.data.forEach((element: any) => {
-    catetory.push(element)
-  })
+  Object.assign(catetory, res.data.data)
 }
 
 const preview = (link: string) => {
@@ -69,7 +68,7 @@ const preview = (link: string) => {
 }
 
 onMounted(async () => {
-  banner = [
+  const bannerData = [
     {
       src: 'https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
     },
@@ -80,6 +79,7 @@ onMounted(async () => {
       src: 'https://img2.baidu.com/it/u=3089456875,3715235379&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
     }
   ]
+  Object.assign(banner, bannerData)
   getCatetory()
 })
 </script>
