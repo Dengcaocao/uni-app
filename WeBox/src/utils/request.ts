@@ -7,7 +7,7 @@ interface IbaseOptions {
 
 class Service {
   baseOptions = {
-    url: 'https://dengcaocao.github.io/',
+    url: '/h5api/',
     data: {},
     header: {
       accessToken: '' // 用户认证
