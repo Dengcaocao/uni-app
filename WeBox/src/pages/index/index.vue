@@ -8,21 +8,22 @@
       :autoplay="true"
       :interval="2000"
       :duration="500">
-      <swiper-item v-for="(image, index) in banner" :key="index">
-        <image class="banner-image" :src="image.src" />
+      <swiper-item v-for="item in banner" :key="item.uuid">
+        <image class="banner-image" :src="item.pic" />
       </swiper-item>
     </swiper>
   </view>
 
-  <view class="icons">
-    <view class="icon">1</view>
-    <view class="icon">2</view>
-    <view class="icon">3</view>
-    <view class="icon">4</view>
-    <view class="icon">5</view>
-    <view class="icon">6</view>
-    <view class="icon">7</view>
-    <view class="icon">8</view>
+  <view class="firend-chain">
+    <view
+      class="item"
+      v-for="item in firendChain"
+      :key="item.uuid"
+      @click="pageHome(item.link)"
+    >
+      <image :src="item.avatar" />
+      <view class="nickname single-line-text">{{item.nickName}}</view>
+    </view>
   </view>
 
   <view class="content-box">
@@ -53,12 +54,34 @@ import type { bannerType, catetoryType } from '@/types/index-type'
 import Api from '@/api/index'
 
 let banner: bannerType[] = reactive([])
+const getBanner = async () => {
+  try {
+    const res: any = await Api.queryBanner()
+    Object.assign(banner, res.data.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
+
+let firendChain: bannerType[] = reactive([])
+const getFirendChain = async () => {
+  try {
+    const res: any = await Api.queryFirendChain()
+    Object.assign(firendChain, res.data.data)
+  } catch (error) {
+    console.log(error)
+  }
+}
 
 let catetory: catetoryType[] = reactive([])
 const getCatetory = async () => {
-  const res: any = await Api.getBanner()
+  const res: any = await Api.queryCatetory()
   // 处理直接赋值视图不更新的问题
   Object.assign(catetory, res.data.data)
+}
+
+const pageHome = (url: string) => {
+  window.open(url)
 }
 
 const preview = (link: string) => {
@@ -68,18 +91,8 @@ const preview = (link: string) => {
 }
 
 onMounted(async () => {
-  const bannerData = [
-    {
-      src: 'https://img1.baidu.com/it/u=3363566985,99735131&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
-    },
-    {
-      src: 'https://img1.baidu.com/it/u=2135316162,3264555983&fm=253&fmt=auto&app=138&f=JPEG?w=889&h=500'
-    },
-    {
-      src: 'https://img2.baidu.com/it/u=3089456875,3715235379&fm=253&fmt=auto&app=138&f=JPEG?w=800&h=500'
-    }
-  ]
-  Object.assign(banner, bannerData)
+  getBanner()
+  getFirendChain()
   getCatetory()
 })
 </script>
@@ -98,19 +111,24 @@ onMounted(async () => {
   line-height: 300rpx;
   text-align: center;
 }
-.icons {
+.firend-chain {
   display: grid;
-  grid-template-columns: repeat(4, 90rpx);
-  grid-gap: 48rpx calc((390rpx - 48rpx)/3);
+  grid-template-columns: repeat(4, 120rpx);
+  grid-gap: 48rpx calc((270rpx - 48rpx)/3);
   padding: 24rpx;
   background-color: #fff;
-  .icon {
-    width: 90rpx;
-    height: 90rpx;
-    line-height: 90rpx;
+  .item {
+    overflow: hidden;
+    width: 120rpx;
     text-align: center;
-    background-color: yellowgreen;
-    border-radius: $uni-border-radius-circle;
+    image {
+      width: 90rpx;
+      height: 90rpx;
+      border-radius: $uni-border-radius-circle;
+    }
+    .nickname {
+      font-size: 24rpx;
+    }
   }
 }
 .content-box {
