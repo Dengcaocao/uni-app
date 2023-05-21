@@ -19,7 +19,7 @@
       :interval="2000"
       :duration="500">
       <swiper-item v-for="item in banner" :key="item.uuid">
-        <image class="banner-image" :src="item.pic" />
+        <image class="banner-image" :src="item.pic" lazy-load />
       </swiper-item>
     </swiper>
 
@@ -30,7 +30,7 @@
         :key="item.uuid"
         @click="pageHome(item.link)"
       >
-        <image :src="item.avatar" />
+        <image :src="item.avatar" lazy-load />
         <view class="nickname single-line-text">{{item.nickName}}</view>
       </view>
     </view>
@@ -43,7 +43,7 @@
           v-for="item in catetory"
           :key="item.uuid"
         >
-          <image class="preview-img" :src="item.pic" />
+          <image class="preview-img" :src="item.pic" lazy-load />
           <view class="info">
             <view class="title">{{item.title}}</view>
             <view class="description">{{item.description}}</view>
@@ -146,7 +146,7 @@ onMounted(async () => {
 }
 
 .swiper {
-  height: 300rpx;
+  height: 375rpx;
   padding: $uni-spacing-row-lg;
   border-radius: $uni-border-radius-lg;
   .banner-image,
