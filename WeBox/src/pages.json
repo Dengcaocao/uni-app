@@ -3,7 +3,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "WeBox"
+				"navigationStyle": "custom"
 			}
 		},
 		{
@@ -35,7 +35,7 @@
 				"pagePath": "pages/more/index",
 				"iconPath": "static/tabbar/project.png",
 				"selectedIconPath": "static/tabbar/project_selected.png",
-				"text": "项目"
+				"text": "分类"
 			}
 		]
 	},
