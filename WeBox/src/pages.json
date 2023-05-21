@@ -13,6 +13,12 @@
 			}
 		},
 		{
+			"path": "pages/details/details",
+			"style": {
+				"navigationStyle": "custom"
+			}
+		},
+		{
 			"path": "pages/preview/index",
 			"style": {
 				"navigationBarTitleText": "preview"

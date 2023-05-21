@@ -42,10 +42,11 @@
           class="demo-item"
           v-for="item in catetory"
           :key="item.uuid"
+          @click="viewDetails(item)"
         >
           <image class="preview-img" :src="item.pic" lazy-load />
           <view class="info">
-            <view class="title">{{item.title}}</view>
+            <view class="title single-line-text">{{item.title}}</view>
             <view class="description">{{item.description}}</view>
             <view class="date">3天前</view>
           </view>
@@ -95,9 +96,9 @@ const pageHome = (url: string) => {
   window.open(url)
 }
 
-const preview = (link: string) => {
+const viewDetails = (info: object) => {
   uni.navigateTo({
-	  url: `/pages/preview/index?link=${link}`
+	  url: `/pages/details/details?info=${info}`
   })
 }
 
