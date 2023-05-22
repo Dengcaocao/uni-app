@@ -1,12 +1,6 @@
-interface IbaseOptions {
-  url: string,
-  data?: object,
-  method?: string,
-  [propName: string]: any
-}
-
 class Service {
-  baseOptions = {
+  count = 0
+  baseOptions: UniApp.RequestOptions = {
     url: '/h5api/',
     data: {},
     header: {
@@ -15,29 +9,31 @@ class Service {
     method: 'GET',
     timeout: 10000
   }
-  request (options: IbaseOptions) {
-    uni.showLoading({
-      title: '稍等，正在从github.io上拉起数据呢!'
-    })
+  request (options: UniApp.RequestOptions) {
+    this.count ++
+    uni.showLoading({ title: '努力加载中' })
     return new Promise((resolve, reject) => {
-      const completeOptions: any = {
+      const completeOptions: UniApp.RequestOptions = {
         ...this.baseOptions,
         ...options,
         url: this.baseOptions.url + options.url
       }
       uni.request({
         ...completeOptions,
-        success: (res: object & { statusCode: number }) => {
+        success: (res: UniApp.RequestSuccessCallbackResult) => {
           if (res.statusCode !== 200) throw new Error('唉，数据拉取失败!')
           resolve(res)
         },
-        fail: (error: object & { message: string }) => {
+        fail: (error: UniApp.AccessFailCallbackResult) => {
           uni.showLoading({
-            title: error.message
+            title: error.errMsg
           })
           reject(error)
         },
-        complete: () => uni.hideLoading()
+        complete: () => {
+          this.count --
+          !this.count && uni.hideLoading()
+        }
       })
     })
   }
