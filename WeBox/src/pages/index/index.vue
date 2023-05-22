@@ -58,35 +58,66 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
-import type { bannerType, catetoryType } from '@/types/index-type'
 import Api from '@/api/index'
 
-let banner: bannerType[] = reactive([])
+interface BannerDataType {
+  uuid: string,
+  pic: string,
+  link: string
+}
+
+const banner = reactive<BannerDataType[]>([])
 const getBanner = async () => {
   try {
-    const res: any = await Api.queryBanner()
-    Object.assign(banner, res.data.data)
+    const res = await Api.queryBanner()
+    Object.assign(banner, res.data)
   } catch (error) {
     console.log(error)
   }
 }
 
-let firendChain: bannerType[] = reactive([])
+interface FirendChainDataType {
+  uuid: string,
+  avatar: string,
+  nickName: string,
+  tag: string[],
+  link: string,
+  status: string
+}
+
+const firendChain = reactive<FirendChainDataType[]>([])
 const getFirendChain = async () => {
   try {
-    const res: any = await Api.queryFirendChain()
-    Object.assign(firendChain, res.data.data)
+    const res = await Api.queryFirendChain()
+    Object.assign(firendChain, res.data)
   } catch (error) {
     console.log(error)
   }
 }
 
-let catetory: any[] = reactive([])
+interface CatetoryDataType {
+  uuid: string,
+  title: string,
+  description: string,
+  pic: string,
+  link: string,
+  type: string,
+  status: string,
+  content: string
+}
+
+interface CatetoryDataListType {
+  uuid: string,
+  name: string,
+  data: CatetoryDataType[]
+}
+
+const catetory = reactive<CatetoryDataType[]>([])
 const getCatetory = async () => {
-  const res: any = await Api.queryCatetory()
-  const upToDateData = res.data.data
-    .map((item: any) => item.data)
-    .map((item: any) => item.slice(0, 5)) // 取前5
+  const res = await Api.queryCatetory()
+  const upToDateData = res.data
+    .map((item: CatetoryDataListType) => item.data)
+    .map((item: CatetoryDataType[]) => item.slice(0, 5)) // 取前5
     .flat()
   // 处理直接赋值视图不更新的问题
   Object.assign(catetory, upToDateData)
@@ -96,13 +127,11 @@ const pageHome = (url: string) => {
   window.open(url)
 }
 
-const viewDetails = (info: object) => {
-  uni.navigateTo({
-	  url: `/pages/details/details?info=${info}`
-  })
+const viewDetails = (info: CatetoryDataType) => {
+  uni.navigateTo({ url: `/pages/details/details?info=${info}` })
 }
 
-onMounted(async () => {
+onMounted(() => {
   getBanner()
   getFirendChain()
   getCatetory()
