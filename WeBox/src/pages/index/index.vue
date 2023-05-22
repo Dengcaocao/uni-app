@@ -39,16 +39,19 @@
       <view class="head">最新</view>
       <view class="demo-list">
         <view
-          class="demo-item"
+          class="demo-item shadow2"
           v-for="item in catetory"
           :key="item.uuid"
           @click="viewDetails(item)"
         >
-          <image class="preview-img" :src="item.pic" lazy-load />
+          <image class="preview-img" :src="item.pic" mode="widthFix" lazy-load />
           <view class="info">
             <view class="title single-line-text">{{item.title}}</view>
-            <view class="description">{{item.description}}</view>
-            <view class="date">3天前</view>
+            <view class="description single-line-text">{{item.description}}</view>
+            <view class="footer">
+              <view class="author">Deng·草草</view>
+              <view class="date">{{dayjs(item.created_at).fromNow()}}</view>
+            </view>
           </view>
         </view>
       </view>
@@ -58,7 +61,30 @@
 
 <script setup lang="ts">
 import { reactive, onMounted } from 'vue'
+import dayjs from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import updateLocale from 'dayjs/plugin/updateLocale'
 import Api from '@/api/index'
+
+dayjs.extend(relativeTime)
+dayjs.extend(updateLocale)
+dayjs.updateLocale('en', {
+  relativeTime: {
+    future: 'in %m',
+    past: '%s 前',
+    s: '秒',
+    m: '分',
+    mm: '%d 分',
+    h: '小时',
+    hh: '%d 小时',
+    d: '天',
+    dd: '%d 天',
+    M: '月',
+    MM: '%d 月',
+    y: 'a 年',
+    yy: '%d 年'
+  }
+})
 
 interface BannerDataType {
   uuid: string,
@@ -103,7 +129,8 @@ interface CatetoryDataType {
   link: string,
   type: string,
   status: string,
-  content: string
+  content: string,
+  created_at: dayjs.Dayjs
 }
 
 interface CatetoryDataListType {
@@ -215,37 +242,43 @@ onMounted(() => {
 .up-to-date {
   padding: $uni-spacing-row-lg;
   .head {
-    font-size: $uni-font-size-base;
     font-weight: 600;
     color: $uni-text-color;
     letter-spacing: 4rpx;
   }
-  .demo-item {
+  .demo-list {
     display: flex;
-    // align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+  .demo-item {
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    width: 339rpx;
     margin-top: 32rpx;
+    padding-bottom: $uni-spacing-col-sm;
+    border-radius: $uni-border-radius-base;
     .preview-img {
-      width: 180rpx;
-      height: 180rpx;
-      border-radius: $uni-border-radius-base;
+      width: 100%;
       background-color: $uni-bg-color;
     }
     .info {
-      display: flex;
-      flex-direction: column;
-      justify-content: space-evenly;
-      font-size: $uni-font-size-base;
-      margin-left: $uni-spacing-row-lg;
+      font-size: $uni-font-size-sm;
+      padding: $uni-spacing-row-base;
       .title {
-        font-size: $uni-font-size-lg;
+        font-size: $uni-font-size-base;
         color: $uni-text-color;
         font-weight: 600;
-        // padding-bottom: $uni-spacing-col-sm;
       }
       .description {
+        margin: $uni-spacing-col-sm 0;
         color: $uni-text-color-grey;
       }
-      .date {
+      .footer {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
         color: $uni-text-color-placeholder;
       }
     }
