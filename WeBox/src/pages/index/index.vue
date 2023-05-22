@@ -42,7 +42,7 @@
           class="demo-item shadow2"
           v-for="item in catetory"
           :key="item.uuid"
-          @click="viewDetails(item)"
+          @click="viewDetails(item.uuid)"
         >
           <image class="preview-img" :src="item.pic" mode="widthFix" lazy-load />
           <view class="info">
@@ -121,7 +121,7 @@ const getFirendChain = async () => {
   }
 }
 
-interface CatetoryDataType {
+export interface CatetoryDataType {
   uuid: string,
   title: string,
   description: string,
@@ -133,7 +133,7 @@ interface CatetoryDataType {
   created_at: dayjs.Dayjs
 }
 
-interface CatetoryDataListType {
+export interface CatetoryDataListType {
   uuid: string,
   name: string,
   data: CatetoryDataType[]
@@ -154,8 +154,8 @@ const pageHome = (url: string) => {
   window.open(url)
 }
 
-const viewDetails = (info: CatetoryDataType) => {
-  uni.navigateTo({ url: `/pages/details/details?info=${info}` })
+const viewDetails = (uuid: string) => {
+  uni.navigateTo({ url: `/pages/details/details?uuid=${uuid}` })
 }
 
 onMounted(() => {
