@@ -108,6 +108,11 @@ onMounted(async () => {
   getCatetory()
 })
 </script>
+<style scoped>
+.swiper>>>.uni-swiper-wrapper {
+  border-radius: 16rpx;
+}
+</style>
 <style scoped lang="scss">
 .product-container {
   display: flex;
@@ -156,9 +161,6 @@ onMounted(async () => {
     height: 100%;
   }
 }
-// .swiper .uni-swiper-wrapper {
-//   border-radius: $uni-border-radius-lg;
-// }
 .firend-chain {
   display: grid;
   grid-template-columns: repeat(4, 120rpx);
