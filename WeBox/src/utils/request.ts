@@ -12,7 +12,7 @@ class Service {
   request (options: UniApp.RequestOptions) {
     this.count ++
     uni.showLoading({ title: '努力加载中' })
-    return new Promise((resolve, reject) => {
+    return new Promise<AnyObject>((resolve, reject) => {
       const completeOptions: UniApp.RequestOptions = {
         ...this.baseOptions,
         ...options,
@@ -22,7 +22,7 @@ class Service {
         ...completeOptions,
         success: (res: UniApp.RequestSuccessCallbackResult) => {
           if (res.statusCode !== 200) throw new Error('唉，数据拉取失败!')
-          resolve(res)
+          resolve(res.data as AnyObject)
         },
         fail: (error: UniApp.AccessFailCallbackResult) => {
           uni.showLoading({
