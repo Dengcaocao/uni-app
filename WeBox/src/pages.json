@@ -26,8 +26,8 @@
 		}
 	],
 	"tabBar": {
-		"color": "#333",
-		"selectedColor": "#6D8c50",
+		"color": "#595861",
+		"selectedColor": "#050017",
 		"borderStyle": "black",
 		"backgroundColor": "#ffffff",
 		"list": [
@@ -39,8 +39,8 @@
 			},
 			{
 				"pagePath": "pages/category/category",
-				"iconPath": "static/tabbar/project.png",
-				"selectedIconPath": "static/tabbar/project_selected.png",
+				"iconPath": "static/tabbar/category.png",
+				"selectedIconPath": "static/tabbar/category_selected.png",
 				"text": "分类"
 			}
 		]
