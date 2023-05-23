@@ -1,7 +1,7 @@
 class Service {
   count = 0
   baseOptions: UniApp.RequestOptions = {
-    url: '/h5api/',
+    url: process.env.NODE_ENV === 'production' ? '/' : '/h5api/',
     data: {},
     header: {
       accessToken: '' // 用户认证
