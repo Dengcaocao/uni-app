@@ -1,4 +1,7 @@
 <template>
+  <view class="navbar">
+    <view class="back" @click="handleBack"></view>
+  </view>
   <image
     class="preview-img"
     mode="widthFix"
@@ -47,12 +50,35 @@ const preview = (url: string) => {
   window.open(url)
 }
 
+const handleBack = () => {
+  uni.navigateBack()
+}
+
 onMounted(async () => {
   await getCatetoryData()
   handleQuery()
 })
 </script>
 <style scoped lang="scss">
+.navbar {
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  height: 44px;
+  padding: 7px 3px;
+  box-sizing: border-box;
+  .back {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 30rpx;
+    height: 30rpx;
+    transform: translate(80%, -50%) rotate(45deg);
+    border-radius: 4rpx;
+    border-bottom: 2px solid #fff;
+    border-left: 2px solid #fff;
+  }
+}
 .preview-img {
   width: 100%;
   background-color: $uni-bg-color;
