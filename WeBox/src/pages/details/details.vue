@@ -37,7 +37,7 @@ const getCatetoryData = async () => {
   Object.assign(catetoryData, data)
 }
 
-let currentData = reactive<CatetoryDataType | any>({})
+const currentData = reactive<CatetoryDataType | any>({})
 const handleQuery = () => {
   const data = catetoryData.find(item => item.uuid === uuid.value) as CatetoryDataType
   Object.assign(currentData, data)
