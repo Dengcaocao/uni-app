@@ -19,9 +19,9 @@
 			}
 		},
 		{
-			"path": "pages/preview/index",
+			"path": "pages/preview/preview",
 			"style": {
-				"navigationBarTitleText": "preview"
+				"navigationStyle": "custom"
 			}
 		}
 	],

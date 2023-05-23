@@ -47,7 +47,8 @@ const handleQuery = () => {
 }
 
 const preview = (url: string) => {
-  window.open(url)
+  // window.open(url)
+  uni.navigateTo({ url: `/pages/preview/preview?url=${url}` })
 }
 
 const handleBack = () => {
