@@ -68,16 +68,26 @@ onMounted(() => {
 </script>
 <style scoped lang="scss">
 .category {
-  height: 80rpx;
   border-bottom: 1px solid $uni-border-color;
   .category-item {
+    display: inline-block;
     padding: 0 $uni-spacing-row-lg;
     font-weight: bold;
-    height: 80rpx;
     line-height: 80rpx;
   }
   .category-item.active {
+    position: relative;
     color: $uni-bg-color;
+  }
+  .category-item.active::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    z-index: 99;
+    width: 100%;
+    height: 2rpx;
+    background-color: $uni-bg-color;
   }
 }
 .content {
