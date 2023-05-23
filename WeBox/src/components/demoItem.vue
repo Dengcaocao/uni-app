@@ -55,6 +55,7 @@ defineProps({
   border-radius: $uni-border-radius-base;
   .preview-img {
     width: 100%;
+    max-height: 339rpx;
     background-color: $uni-bg-color;
   }
   .info {
