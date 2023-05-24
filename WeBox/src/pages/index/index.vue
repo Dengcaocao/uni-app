@@ -18,7 +18,11 @@
       :autoplay="true"
       :interval="2000"
       :duration="500">
-      <swiper-item v-for="item in banner" :key="item.uuid">
+      <swiper-item
+        v-for="item in banner"
+        :key="item.uuid"
+        @click="handleView(item.link)"
+      >
         <image class="banner-image" :src="item.pic" lazy-load />
       </swiper-item>
     </swiper>
@@ -116,6 +120,10 @@ const getCatetory = async () => {
     .flat()
   // 处理直接赋值视图不更新的问题
   Object.assign(catetory, upToDateData)
+}
+
+const handleView = (url: string) => {
+  uni.navigateTo({ url: `/pages/preview/preview?url=${url}` })
 }
 
 const pageHome = (url: string) => {
