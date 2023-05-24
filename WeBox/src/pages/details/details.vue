@@ -82,6 +82,14 @@ onMounted(async () => {
     color: $uni-text-color;
     font-weight: 500;
     letter-spacing: 2rpx;
+    code {
+      display: block;
+      overflow-x: scroll;
+      padding: $uni-spacing-row-base;
+      margin: $uni-spacing-row-base 0;
+      border-radius: $uni-border-radius-base;
+      background-color: #f4f2f0;
+    }
   }
 }
 </style>
