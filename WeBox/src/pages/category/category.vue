@@ -1,5 +1,5 @@
 <template>
-  <scroll-view class="category" :scroll-x="true">
+  <scroll-view class="category shadow2" :scroll-x="true">
     <text
       class="category-item"
       :class="{'active': activeIndex === index}"
@@ -68,29 +68,36 @@ onMounted(() => {
 </script>
 <style scoped lang="scss">
 .category {
-  border-bottom: 1px solid $uni-border-color;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  background-color: #fff;
+  color: $uni-text-color-placeholder;
   .category-item {
     display: inline-block;
     padding: 0 $uni-spacing-row-lg;
     font-weight: bold;
-    line-height: 80rpx;
+    line-height: 88rpx;
   }
   .category-item.active {
     position: relative;
-    color: $uni-bg-color;
+    color: $uni-text-color;
   }
   .category-item.active::after {
     content: "";
     position: absolute;
-    left: 0;
+    left: 50%;
     bottom: 0;
     z-index: 99;
-    width: 100%;
-    height: 2rpx;
-    background-color: $uni-bg-color;
+    transform: translateX(-50%);
+    width: 66rpx;
+    height: 6rpx;
+    border-radius: 6rpx;
+    background-color: $uni-text-color;
   }
 }
 .content {
+  position: relative;
   padding: $uni-spacing-row-lg;
   .demo-list {
     display: flex;
